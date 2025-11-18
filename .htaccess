@@ -1,23 +1,4 @@
-Options -Indexes
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /latihan-ci3/
-
-    # Redirect index.php out of the URL (optional)
-    RewriteCond %{THE_REQUEST} \s/index\.php [NC]
-    RewriteRule ^index\.php(.*)$ /$1 [R=301,L]
-
-    # Block direct access to sensitive folders
-    RewriteRule ^(application|system|tests)/ - [F,L,NC]
-
-    # If the requested resource doesn't exist as a file or dir, route to index.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php/$1 [L]
-</IfModule>
-
-<IfModule !mod_rewrite.c>
-    # If mod_rewrite is not available, fallback to index.php for 404 handling
-    ErrorDocument 404 /index.php
-</IfModule>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
